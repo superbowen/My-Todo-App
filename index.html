@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>My Todo App</title>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <!--<link rel="stylesheet" href="node_modules/normalize.css/normalize.css">-->
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/base.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>我的Todo</h1>
+
+        <div class="add-task clearfloat">
+            <input type="text" placeholder="e.g. 下午记得买菜">
+            <button type="submit">添加</button>
+        </div>
+
+        <ul class="task-list">
+            <li class="task-item">
+                <span><input type="checkbox"></span>
+                <span class="task-content">item1</span>
+                <span class="del">删除</span>
+                <span class="det">详细</span>
+            </li>
+            <li class="task-item">
+                <span><input type="checkbox"></span>
+                <span class="task-content">item1</span>
+                <span class="del">删除</span>
+                <span class="det">详细</span>
+            </li>
+            <li class="task-item">
+                <span><input type="checkbox"></span>
+                <span class="task-content">item1</span>
+                <span class="del">删除</span>
+                <span class="det">详细</span>
+            </li>
+            <li class="task-item">
+                <span><input type="checkbox"></span>
+                <span class="task-content">item1</span>
+                <span class="del">删除</span>
+                <span class="det">详细</span>
+            </li>
+            <li class="task-item">
+                <span><input type="checkbox"></span>
+                <span class="task-content">item1</span>
+                <span class="del">删除</span>
+                <span class="det">详细</span>
+            </li>
+        </ul>
+
+        <div class="task-detail-mask"></div>
+
+        <div class="task-detail">
+            <div class="content">下午记得买菜</div>
+            <div class="remind clearfloat">
+                <input type="date">
+                <button type="submit">保存</button>
+            </div>
+            <div class="desc">
+                <textarea rows="3">韭菜、黄瓜、酱油</textarea>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="js/base.js"></script>
+</html>
