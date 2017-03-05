@@ -23,29 +23,26 @@
         refresh_list();
         return true;
     }
-    function listen() {
-        for(var i in task_list){
-            task_list[i].index=i;
-            $('#del_' + i).bind('click',function () {
+    function listen(i) {
+        $('#del_' + i).on('click',function () {
                 task_list[i]=i;
-                console.log(i)
-            }
-
-                // delete_task(i);
-            );
-        }
+                // console.log(i);
+                delete_task(i);
+            } );
+    }
+    function render_task(i) {
+        $('.task-list').prepend(
+            $(_tpl
+                .replace('{{item-content}}',task_list[i].content)
+                .replace(/\{\{index\}\}/g,i))
+        );
     }
     function render_task_list() {
         $('.task-list').empty();//
-        for(var i=0;i<task_list.length;i++){
-
-            $('.task-list').prepend(
-                $(_tpl
-                    .replace('{{item-content}}',task_list[i].content)
-                    .replace(/\{\{index\}\}/g,i))
-            );
+        for(var i=0;i<task_list.length;i++){//循环里所有代码封装成函数，防止闭包问题
+            render_task(i);
+            listen(i);
         }
-        listen();
     }
     $('.add-task').on('submit',function (e) {
         e.preventDefault();//阻止默认行为
@@ -66,7 +63,7 @@
     });
     //清除函数
     function delete_task(_index) {
-        if(_index===undefined||!task_list[_index]) return;
+        // if(_index===undefined||!task_list[_index]) return;
         // delete task_list[index];
         console.log('delete_task',task_list.splice(_index,1)[0]);
         refresh_list();
