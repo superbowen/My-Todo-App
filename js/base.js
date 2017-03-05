@@ -1,16 +1,13 @@
 ;(function () {
     'use strict';
     // store.clear();
-    // var task_list={};
     var task_list=[];
-    // var new_task={};
     var _tpl=$('.task-list').html();//html模板
 
     init();
     function init() {
         task_list=store.get('task_list')||[];
         render_task_list();
-        // listen();
     }
     function refresh_list() {
         store.set('task_list',task_list);
@@ -27,24 +24,23 @@
         $('#del_' + i).on('click',function () {
                 console.log("点",task_list[i]);
                 var _r=confirm("确定删除？");
-                _r?delete_task(i):null;
-                // if(_r) {delete_task(i) }
-                // delete_task(i);
+                _r?delete_task(i):null;           // if(_r) {delete_task(i)
         } );
     }
     function render_task(i) {
-        $('.task-list').prepend(
-            $(_tpl
-                .replace('{{item-content}}',task_list[i].content)
-                .replace(/\{\{index\}\}/g,i))
-        );
+        $('.task-list').prepend($(
+            _tpl.replace('{{item-content}}',task_list[i].content)
+                .replace(/\{\{index\}\}/g,i)
+        ));
     }
     function render_task_list() {
         $('.task-list').empty();//
-        for(var i=0;i<task_list.length;i++){//循环里所有代码封装成函数，防止闭包问题
+        //for(var i=0;i<task_list.length;i++){}
+        //循环里所有代码封装成函数，可以防止闭包带来的问题
+        $(task_list).each(function (i,obj) {
             render_task(i);
             listen(i);
-        }
+        });
     }
     $('.add-task').on('submit',function (e) {
         e.preventDefault();//阻止默认行为
@@ -55,7 +51,7 @@
         console.log('新',new_task);
         if(add_task(new_task)){
             render_task_list();
-        };
+        }
     });
     //清除全部任务
     $('h1').on('dblclick',function (e) {
