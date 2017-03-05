@@ -20,11 +20,9 @@ h1{
      margin:8px 0;
  }
 .task-item{
-    /*padding:10px;*/
     background: #ffffff;
-    color:#333;
+    color: #333;
     margin-bottom:2px;
-    /*border-radius: 3px;*/
     box-shadow: 0 2px 3px rgba(0,0,0,.4);
     cursor: pointer;
 }
@@ -34,6 +32,10 @@ h1{
 .det,.del{
     float: right;
     margin-right: 5px;
+    opacity:.6;
+}
+.det:hover,.del:hover{
+    opacity:1;
 }
 
 /*.checkbox{
@@ -93,7 +95,7 @@ button:hover{
      background: #86cef1;
  }
 .add-task button{
-    padding:9px;
+    padding:8px;
     width: 15%;
 }
 .task-detail button{
