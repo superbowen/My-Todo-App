@@ -38,6 +38,11 @@
             render_task_list();
         };
     });
+    $('h1').on('dblclick',function (e) {
+        e.preventDefault();
+        store.clear();
+        init();
+    });
 
 
 
