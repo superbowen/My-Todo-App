@@ -5,6 +5,7 @@
     <title>My Todo App</title>
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <!--<link rel="stylesheet" href="node_modules/normalize.css/normalize.css">-->
+    <script src="node_modules/store/store.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/base.css">
 
@@ -13,54 +14,32 @@
     <div class="container">
         <h1>我的Todo</h1>
 
-        <div class="add-task clearfloat">
-            <input type="text" placeholder="e.g. 下午记得买菜">
-            <button type="submit">添加</button>
-        </div>
+        <form class="add-task clearfloat">
+            <input name='content' type="text" placeholder="e.g. 下午记得买菜">
+            <button name="submit" type="submit">添加</button>
+        </form>
 
         <ul class="task-list">
-            <li class="task-item">
-                <span><input type="checkbox"></span>
-                <span class="task-content">item1</span>
-                <span class="del">删除</span>
+            <li class="task-item" id="item_{{index}}">
+                <span class="checkbox"><input type="checkbox"></span>
+                <span class="task-content">{{item-content}}</span>
                 <span class="det">详细</span>
-            </li>
-            <li class="task-item">
-                <span><input type="checkbox"></span>
-                <span class="task-content">item1</span>
                 <span class="del">删除</span>
-                <span class="det">详细</span>
-            </li>
-            <li class="task-item">
-                <span><input type="checkbox"></span>
-                <span class="task-content">item1</span>
-                <span class="del">删除</span>
-                <span class="det">详细</span>
-            </li>
-            <li class="task-item">
-                <span><input type="checkbox"></span>
-                <span class="task-content">item1</span>
-                <span class="del">删除</span>
-                <span class="det">详细</span>
-            </li>
-            <li class="task-item">
-                <span><input type="checkbox"></span>
-                <span class="task-content">item1</span>
-                <span class="del">删除</span>
-                <span class="det">详细</span>
             </li>
         </ul>
 
         <div class="task-detail-mask"></div>
 
         <div class="task-detail">
-            <div class="content">下午记得买菜</div>
-            <div class="remind clearfloat">
-                <input type="date">
-                <button type="submit">保存</button>
-            </div>
-            <div class="desc">
-                <textarea rows="3">韭菜、黄瓜、酱油</textarea>
+            <h2 class="content">{{item-content}}</h2>
+            <form class="remind clearfloat">
+                <input name='data' type="date">
+                <input name='time' type="time">
+                <button name='submit' type="submit">保存</button>
+                <textarea name="desc" rows="3">{{item-desc}}</textarea>
+            </form>
+            <div >
+
             </div>
         </div>
 

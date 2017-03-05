@@ -6,7 +6,8 @@ body{
     background: #00334b;
 }
 .container{
-    max-width:700px;
+    max-width:900px;
+    min-width:400px;
     margin:0 auto ;
     position: relative;
 }
@@ -35,12 +36,23 @@ h1{
     margin-right: 5px;
 }
 
+/*.checkbox{
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 3px;
+    height: 19.2px;
+}*/
+input[type=checkbox]{
+    position: relative;
+    top:3px;
+}
+
 input,.task-item,.task-detail,textarea{
     border-radius: 3px;
     padding:10px;
 }
 
-input[type=text],input[type=date] {
+input[type=text],input[type=date],input[type=time]{
     border:0;
     display: block;
     width: 84%;
@@ -51,17 +63,23 @@ input[type=text],input[type=date] {
 }
 input[type=text]:hover,
 input[type=date]:hover,
+input[type=time]:hover,
 textarea:hover,
 textarea:focus,
 input[type=text]:focus,
-input[type=date]:focus{
-    background: #ffffff;
+input[type=date]:focus,
+input[type=time]:focus{
+    background: #fff;
     box-shadow:inset 0 1px 2px rgba(0,0,0,.2);
 }
 input[type=date]{
-     width:68%;
+     width:46%;
      margin-right: 2%;
  }
+input[type=time]{
+    width:20%;
+    margin-right: 2%;
+}
 button{
     display: inline-block;
     border:0;
@@ -72,7 +90,7 @@ button{
     background:#46b1e4;
 }
 button:hover{
-     background: #5fb9e4;
+     background: #86cef1;
  }
 .add-task button{
     padding:9px;
@@ -80,7 +98,8 @@ button:hover{
 }
 .task-detail button{
     width:30%;
-    padding:12px;
+    padding:11px;
+    float: right;
 }
 
 .task-detail-mask{
@@ -95,7 +114,6 @@ button:hover{
     background:rgba(30,30,30,.6);
 }
 
-
 .task-detail{
     display: none;
     position: absolute;
@@ -106,7 +124,7 @@ button:hover{
     margin:auto;
     padding:10px;
     width: 60%;
-    height: 200px;
+    height: 195px;
     background: #fff;
 }
 .task-detail .content{
@@ -117,10 +135,11 @@ button:hover{
     font-size: 16px;
 }
 textarea{
+    margin-top: 10px;
     display: block;
     width: 100%!important;
-    height: 50%;
     background:#eee;
+    float: left;
     box-shadow:inset 0 1px 2px rgba(0,0,0,.3);
 }
 .remind{
