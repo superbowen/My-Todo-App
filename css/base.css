@@ -13,7 +13,7 @@ body{
 }
 h1{
     text-align: center;
-    padding:30px;
+    padding:60px 0 30px 0;
     color:#fff;
 }
 .task-list{
@@ -38,16 +38,10 @@ h1{
     opacity:1;
 }
 
-/*.checkbox{
-    display: inline-block;
-    vertical-align: middle;
-    padding-top: 3px;
-    height: 19.2px;
-}*/
-input[type=checkbox]{
+/*input[type=checkbox]{
     position: relative;
     top:3px;
-}
+}*/
 
 input,.task-item,.task-detail,textarea{
     border-radius: 3px;

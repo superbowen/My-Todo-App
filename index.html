@@ -21,7 +21,7 @@
 
         <ul class="task-list">
             <li class="task-item" id="item_{{index}}">
-                <span class="checkbox"><input type="checkbox"></span>
+                <!--<span class="checkbox"><input type="checkbox"></span>-->
                 <span class="task-content">{{item-content}}</span>
                 <span class="det" id="det_{{index}}">详细</span>
                 <span class="del" id="del_{{index}}">删除</span>
@@ -31,9 +31,9 @@
         <div class="task-detail-mask"></div>
 
         <div class="task-detail">
-            <h2 class="content">{{item-content}}</h2>
-            <form class="remind clearfloat">
-                <input name='data' type="date">
+            <form class="remind ">
+                <h2 class="content">{{item-content}}</h2>
+                <input name='date' type="date">
                 <input name='time' type="time">
                 <button name='submit' type="submit">保存</button>
                 <textarea name="desc" rows="3">{{item-desc}}</textarea>
