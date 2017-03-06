@@ -15,13 +15,13 @@
         <h1>我的Todo</h1>
 
         <form class="add-task clearfloat">
-            <input name='content' type="text" placeholder="e.g. 下午记得买菜">
+            <input name='content' type="text" placeholder="e.g. 明天晚上去看电影">
             <button name="submit" type="submit">添加</button>
         </form>
 
         <ul class="task-list">
-            <li class="task-item" id="item_{{index}}">
-                <!--<span class="checkbox"><input type="checkbox"></span>-->
+            <li class="task-item clearfloat" id="item_{{index}}">
+                <input class="complete" type="checkbox">
                 <span class="task-content">{{item-content}}</span>
                 <span class="det" id="det_{{index}}">详细</span>
                 <span class="del" id="del_{{index}}">删除</span>
@@ -32,15 +32,12 @@
 
         <div class="task-detail">
             <form class="remind ">
-                <h2 class="content">{{item-content}}</h2>
-                <input name='date' type="date">
-                <input name='time' type="time">
+                <input name="content"  type="text" class="content">
+                <input name='date' type="date" placeholder="日期">
+                <input name='time' type="time" placeholder="时间">
                 <button name='submit' type="submit">保存</button>
-                <textarea name="desc" rows="3">{{item-desc}}</textarea>
+                <textarea name="desc" >{{item-desc}}</textarea>
             </form>
-            <div >
-
-            </div>
         </div>
 
     </div>

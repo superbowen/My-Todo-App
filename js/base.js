@@ -4,13 +4,13 @@
     var task_list=[];
     var _tpl=$('.task-list').html();//html模板
 
-    //初始化，读取localStorage
+    //初始化，读取localStorage，并渲染
     init();
     function init() {
         task_list=store.get('task_list')||[];
-        console.log('当前任务列表',task_list);
         render_task_list();
     }
+    console.log('当前任务列表task_list',task_list);
     //更新列表并渲染界面
     function refresh_list() {
         store.set('task_list',task_list);
@@ -62,11 +62,11 @@
     function show_detail(i){
         //渲染任务详情界面
         $('.task-detail').show();$('.task-detail-mask').show();
-        var $cont=$('h2.content'),
+        var $cont=$('.content'),
                 $desc=$('textarea[name=desc]'),
                 $date=$('input[name=date]'),
                 $time=$('input[name=time]');
-        $cont.text(task_list[i].content);
+        $cont.val(task_list[i].content);
         $desc.val(task_list[i].desc);
         $date.val(task_list[i].date);
         $time.val(task_list[i].time);
@@ -74,7 +74,7 @@
             $('.remind').on('submit',function (e) {
                 e.preventDefault();
                 task_list[i].desc=$desc.val();
-                task_list[i].content=$cont.text();
+                task_list[i].content=$cont.val();
                 task_list[i].date=$date.val();
                 task_list[i].time=$time.val();
                 console.log('任务内容更新为',task_list[i]);
@@ -87,9 +87,8 @@
         e.preventDefault();
         console.log('点击了清空操作');
         var _q=confirm('确定清空全部任务吗？');
-        _q?
-            store.clear()&&init()&&console.log('清空了任务列表'):
-            console.log('取消了清空操作')
+        if(_q) {store.clear();init();console.log('清空了任务列表');console.log('当前任务列表task_list',task_list);}
+        else{    console.log('取消了清空操作')};
     });
     //蒙版
     $('.task-detail-mask').on('click',function () {
