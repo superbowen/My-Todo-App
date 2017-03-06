@@ -1,31 +1,58 @@
 ;(function () {
     'use strict';
-    // store.clear();
+
     var task_list=[];
     var _tpl=$('.task-list').html();//html模板
 
+    //初始化，读取localStorage
     init();
     function init() {
         task_list=store.get('task_list')||[];
         console.log('当前任务列表',task_list);
         render_task_list();
     }
+    //更新列表并渲染界面
     function refresh_list() {
         store.set('task_list',task_list);
         console.log('当前任务列表task_list',task_list);
         render_task_list();
     }
+    //增加任务
     function add_task(nt) {
         init();
         task_list.push(nt);
         refresh_list();
         return true;
     }
+    //删除任务
+    function delete_task(_index) {
+        // if(_index===undefined||!task_list[_index]) return;
+        // delete task_list[_index];
+        var _d=task_list.splice(_index,1);
+        console.log('删除了任务',_d[0]);
+        refresh_list();
+    }
+    //渲染界面
+    function render_task_list() {
+        $('.task-list').empty();//
+        //for(var i=0;i<task_list.length;i++){}
+        //循环里所有代码封装成函数，可以防止闭包带来的问题
+        $(task_list).each(function (i,obj) {
+            render_task(i);
+            listen(i);
+        });
+    }
+    function render_task(i) {
+        $('.task-list').prepend($(
+            _tpl.replace('{{item-content}}',task_list[i].content)
+                .replace(/\{\{index\}\}/g,i)
+        ));
+    }
     function listen(i) {
         $('#del_' + i).on('click',function () {
-                console.log("点击了删除按钮",task_list[i]);
-                var _r=confirm("确定删除？");
-                _r?delete_task(i):console.log("取消了删除操作");
+            console.log("点击了删除按钮",task_list[i]);
+            var _r=confirm("确定删除？");
+            _r?delete_task(i):console.log("取消了删除操作");
         } );
         $('#det_'+i).on('click',function () {
             show_detail(i);
@@ -33,6 +60,7 @@
         })
     }
     function show_detail(i){
+        //渲染任务详情界面
         $('.task-detail').show();$('.task-detail-mask').show();
         var $cont=$('h2.content'),
                 $desc=$('textarea[name=desc]'),
@@ -42,6 +70,7 @@
         $desc.val(task_list[i].desc);
         $date.val(task_list[i].date);
         $time.val(task_list[i].time);
+            //保存按钮
             $('.remind').on('submit',function (e) {
                 e.preventDefault();
                 task_list[i].desc=$desc.val();
@@ -53,25 +82,21 @@
                 $('.task-detail-mask').click();
             });
     }
+    //隐藏的清除全部任务
+    $('h1').on('dblclick',function (e) {
+        e.preventDefault();
+        console.log('点击了清空操作');
+        var _q=confirm('确定清空全部任务吗？');
+        _q?
+            store.clear()&&init()&&console.log('清空了任务列表'):
+            console.log('取消了清空操作')
+    });
+    //蒙版
     $('.task-detail-mask').on('click',function () {
         $(this).hide();$('.task-detail').hide();
         $('.remind').unbind('submit');
     });
-    function render_task(i) {
-        $('.task-list').prepend($(
-            _tpl.replace('{{item-content}}',task_list[i].content)
-                .replace(/\{\{index\}\}/g,i)
-        ));
-    }
-    function render_task_list() {
-        $('.task-list').empty();//
-        //for(var i=0;i<task_list.length;i++){}
-        //循环里所有代码封装成函数，可以防止闭包带来的问题
-        $(task_list).each(function (i,obj) {
-            render_task(i);
-            listen(i);
-        });
-    }
+    //增加按钮
     $('.add-task').on('submit',function (e) {
         e.preventDefault();//阻止默认行为
         var new_task={};
@@ -84,20 +109,7 @@
         }
         $('input[name=content]').val('');
     });
-    //清除全部任务
-    $('h1').on('dblclick',function (e) {
-        e.preventDefault();
-        store.clear();
-        init();
-    });
-    //清除函数
-    function delete_task(_index) {
-        // if(_index===undefined||!task_list[_index]) return;
-        // delete task_list[_index];
-        var _d=task_list.splice(_index,1);
-        console.log('删除了任务',_d[0]);
-        refresh_list();
-    }
+
 
 
 
