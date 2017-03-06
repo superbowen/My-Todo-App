@@ -149,3 +149,8 @@ textarea{
 .remind{
     float: left;
 }
+
+.ttrue{
+    text-decoration: line-through;
+    opacity:.5;
+}

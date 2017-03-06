@@ -11,7 +11,7 @@
         render_task_list();
     }
     console.log('当前任务列表task_list',task_list);
-    //更新列表并渲染界面
+    //更新列表(储存数据)并渲染界面
     function refresh_list() {
         store.set('task_list',task_list);
         console.log('当前任务列表task_list',task_list);
@@ -37,27 +37,39 @@
         $('.task-list').empty();//
         //for(var i=0;i<task_list.length;i++){}
         //循环里所有代码封装成函数，可以防止闭包带来的问题
-        $(task_list).each(function (i,obj) {
+        $(task_list).each(function (i) {
             render_task(i);
             listen(i);
         });
     }
     function render_task(i) {
-        $('.task-list').prepend($(
-            _tpl.replace('{{item-content}}',task_list[i].content)
-                .replace(/\{\{index\}\}/g,i)
-        ));
+        if(task_list[i].complete){
+            $('.task-list').prepend($(
+                _tpl.replace('{{item-content}}',task_list[i].content)
+                    .replace(/\{\{index\}\}/g,i)
+            ));
+        }else{
+            $('.task-list').prepend($(
+                _tpl.replace('{{item-content}}',task_list[i].content)
+                    .replace(/\{\{index\}\}/g,i)
+                    .replace(/checked/,'')
+                    .replace(/ttrue/,'')
+            ));
+        }
     }
     function listen(i) {
         $('#del_' + i).on('click',function () {
             console.log("点击了删除按钮",task_list[i]);
             var _r=confirm("确定删除？");
             _r?delete_task(i):console.log("取消了删除操作");
-        } );
+        });
         $('#det_'+i).on('click',function () {
             show_detail(i);
             console.log('查看了任务',task_list[i])
-        })
+        });
+        $('#complete_'+i).on('click',function () {
+            task_complete(i);
+        });
     }
     function show_detail(i){
         //渲染任务详情界面
@@ -81,6 +93,13 @@
                 refresh_list();
                 $('.task-detail-mask').click();
             });
+    }
+    function task_complete(i) {
+        var _c=$('#complete_'+i).is(':checked');
+        // console.log(_c);
+        task_list[i].complete=_c;
+        console.log('任务状态更新为',task_list[i]);
+        refresh_list();
     }
     //隐藏的清除全部任务
     $('h1').on('dblclick',function (e) {
@@ -109,7 +128,10 @@
         $('input[name=content]').val('');
     });
 
-
+    // $('.complete').on('click',function () {
+    //     var _complete=$(this).is(':checked');
+    //     console.log(_complete);
+    // })
 
 
 
