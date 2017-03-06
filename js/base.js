@@ -44,7 +44,7 @@
     }
     function render_task(i) {
         if(task_list[i].complete){
-            $('.task-list').prepend($(
+            $('.task-list').append($(
                 _tpl.replace('{{item-content}}',task_list[i].content)
                     .replace(/\{\{index\}\}/g,i)
             ));
