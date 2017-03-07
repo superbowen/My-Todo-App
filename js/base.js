@@ -1,6 +1,6 @@
 ;(function () {
     'use strict';
-
+    $('input[name=date]').datetimepicker();
     var task_list=[];
     var _tpl=$('.task-list').html();//html模板
 
@@ -53,7 +53,7 @@
                 _tpl.replace('{{item-content}}',task_list[i].content)
                     .replace(/\{\{index\}\}/g,i)
                     .replace(/checked/,'')
-                    .replace(/ttrue/,'')
+                    .replace(/completed/,'')
             ));
         }
     }
@@ -74,21 +74,18 @@
     function show_detail(i){
         //渲染任务详情界面
         $('.task-detail').show();$('.task-detail-mask').show();
-        var $cont=$('.content'),
+        var $cont=$('.task-detail .content'),
                 $desc=$('textarea[name=desc]'),
-                $date=$('input[name=date]'),
-                $time=$('input[name=time]');
+                $date=$('.task-detail input[name=date]');
         $cont.val(task_list[i].content);
         $desc.val(task_list[i].desc);
         $date.val(task_list[i].date);
-        $time.val(task_list[i].time);
             //保存按钮
             $('.remind').on('submit',function (e) {
                 e.preventDefault();
                 task_list[i].desc=$desc.val();
                 task_list[i].content=$cont.val();
                 task_list[i].date=$date.val();
-                task_list[i].time=$time.val();
                 console.log('任务内容更新为',task_list[i]);
                 refresh_list();
                 $('.task-detail-mask').click();
@@ -128,10 +125,7 @@
         $('input[name=content]').val('');
     });
 
-    // $('.complete').on('click',function () {
-    //     var _complete=$(this).is(':checked');
-    //     console.log(_complete);
-    // })
+
 
 
 
