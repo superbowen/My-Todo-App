@@ -9,7 +9,7 @@ body{
 .container{
     max-width:900px;
     min-width:400px;
-    min-height:800px;
+    /*min-height:800px;*/
     margin:0 auto ;
     position: relative;
 }
@@ -34,6 +34,12 @@ h1{
 .task-item .task-content{
     float: left;
 }
+.completed{
+    opacity:.5;
+}
+.completed .task-content{
+    text-decoration: line-through;
+}
 .det,.del{
     float: right;
     margin-right: 5px;
@@ -42,6 +48,13 @@ h1{
 .det:hover,.del:hover{
     opacity:1;
 }
+.time-remaining{
+    float: right;
+    margin-right: 10px;
+}
+/*.completed .time-remaining{
+    display: none;
+}*/
 
 input[type=checkbox]{
         width: 1.2em;
@@ -140,9 +153,3 @@ textarea{
     float: left;
 }
 
-.completed{
-    opacity:.5;
-}
-.completed .task-content{
-    text-decoration: line-through;
-}
