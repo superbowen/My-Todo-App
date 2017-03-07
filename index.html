@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>My Todo App</title>
-    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="js/jquery.js"></script>
     <!--<link rel="stylesheet" href="node_modules/normalize.css/normalize.css">-->
-    <script src="node_modules/store/store.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/jquery.datetimepicker.full.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/jquery.datetimepicker.min.css">
+
 
 </head>
 <body>
@@ -15,13 +18,13 @@
         <h1>我的Todo</h1>
 
         <form class="add-task clearfloat">
-            <input name='content' type="text" placeholder="e.g. 下午记得买菜">
+            <input name='content' type="text" placeholder="e.g. 明天晚上去看电影">
             <button name="submit" type="submit">添加</button>
         </form>
 
         <ul class="task-list">
-            <li class="task-item" id="item_{{index}}">
-                <span class="checkbox"><input type="checkbox"></span>
+            <li class="task-item clearfloat completed" id="item_{{index}}">
+                <input class="complete" id="complete_{{index}}" type="checkbox" checked>
                 <span class="task-content">{{item-content}}</span>
                 <span class="det" id="det_{{index}}">详细</span>
                 <span class="del" id="del_{{index}}">删除</span>
@@ -31,16 +34,12 @@
         <div class="task-detail-mask"></div>
 
         <div class="task-detail">
-            <h2 class="content">{{item-content}}</h2>
-            <form class="remind clearfloat">
-                <input name='data' type="date">
-                <input name='time' type="time">
+            <form class="remind ">
+                <input name="content"  type="text" class="content">
+                <input name='date' class="date" type="text" placeholder="日期">
                 <button name='submit' type="submit">保存</button>
-                <textarea name="desc" rows="3">{{item-desc}}</textarea>
+                <textarea name="desc" >{{item-desc}}</textarea>
             </form>
-            <div >
-
-            </div>
         </div>
 
     </div>

@@ -2,10 +2,11 @@ body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,s
 	margin:0;padding:0
 }
 body{
-	font: 16px/20px "Microsoft YaHei",Lyh-Regular,helvetica,arial,sans-serif;
+	/*font: 16px/20px "Microsoft YaHei",Lyh-Regular,helvetica,arial,sans-serif;*/
 	background:#f1f2f3;-webkit-text-size-adjust:100%;
     font-family:'Avenir Next','Lantinghei SC';
     font-size: 14px;
+    line-height: 1.2em;
     -webkit-font-smoothing:antialiased;
 }
 a{color:#2d374b;text-decoration:none}
