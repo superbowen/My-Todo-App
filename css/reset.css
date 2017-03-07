@@ -4,7 +4,7 @@ body,ol,ul,h1,h2,h3,h4,h5,h6,p,th,td,dl,dd,form,fieldset,legend,input,textarea,s
 body{
 	/*font: 16px/20px "Microsoft YaHei",Lyh-Regular,helvetica,arial,sans-serif;*/
 	background:#f1f2f3;-webkit-text-size-adjust:100%;
-    font-family:'Avenir Next','Lantinghei SC';
+    font-family:'Avenir Next','Lantinghei SC',"Microsoft YaHei";
     font-size: 14px;
     line-height: 1.2em;
     -webkit-font-smoothing:antialiased;

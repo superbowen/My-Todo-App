@@ -3,22 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>My Todo App</title>
-    <script src="js/jquery.js"></script>
-    <!--<link rel="stylesheet" href="node_modules/normalize.css/normalize.css">-->
-    <script src="js/store.js"></script>
-    <script src="js/jquery.datetimepicker.full.js"></script>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/jquery.datetimepicker.min.css">
-
-
 </head>
 <body>
     <div class="container">
         <h1>我的Todo</h1>
 
         <form class="add-task clearfloat">
-            <input name='content' type="text" placeholder="e.g. 明天晚上去看电影">
+            <input name='content' type="text" placeholder="e.g. 明天晚上去看电影" autofocus="autofocus">
             <button name="submit" type="submit">添加</button>
         </form>
 
@@ -26,8 +20,9 @@
             <li class="task-item clearfloat completed" id="item_{{index}}">
                 <input class="complete" id="complete_{{index}}" type="checkbox" checked>
                 <span class="task-content">{{item-content}}</span>
-                <span class="det" id="det_{{index}}">详细</span>
                 <span class="del" id="del_{{index}}">删除</span>
+                <span class="det" id="det_{{index}}">详细</span>
+                <span class="time-remaining"><i>{{time-remaining}}</i></span>
             </li>
         </ul>
 
@@ -36,13 +31,16 @@
         <div class="task-detail">
             <form class="remind ">
                 <input name="content"  type="text" class="content">
-                <input name='date' class="date" type="text" placeholder="日期">
+                <input name='date' class="date" type="text" placeholder="设置日期...">
                 <button name='submit' type="submit">保存</button>
-                <textarea name="desc" >{{item-desc}}</textarea>
+                <textarea name="desc" placeholder="添加描述...">{{item-desc}}</textarea>
             </form>
         </div>
 
     </div>
 </body>
+<script src="js/jquery.js"></script>
+<script src="js/store.js"></script>
+<script src="js/jquery.datetimepicker.full.js"></script>
 <script src="js/base.js"></script>
 </html>

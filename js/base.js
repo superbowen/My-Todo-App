@@ -1,22 +1,30 @@
 ;(function () {
     'use strict';
+
+
     $('input[name=date]').datetimepicker();
     var task_list=[];
     var _tpl=$('.task-list').html();//html模板
+    var intDiff;
 
-    //初始化，读取localStorage，并渲染
+
+
+    // setInterval(render_task_list(), 1000);//每秒渲染一次界面
+    //初始化，读取localStorage，并渲染，相当于刷新界面
     init();
     function init() {
         task_list=store.get('task_list')||[];
         render_task_list();
     }
     console.log('当前任务列表task_list',task_list);
+
     //更新列表(储存数据)并渲染界面
     function refresh_list() {
         store.set('task_list',task_list);
         console.log('当前任务列表task_list',task_list);
         render_task_list();
     }
+
     //增加任务
     function add_task(nt) {
         init();
@@ -24,6 +32,7 @@
         refresh_list();
         return true;
     }
+
     //删除任务
     function delete_task(_index) {
         // if(_index===undefined||!task_list[_index]) return;
@@ -32,21 +41,21 @@
         console.log('删除了任务',_d[0]);
         refresh_list();
     }
+
     //渲染界面
     function render_task_list() {
-        $('.task-list').empty();//
-        //for(var i=0;i<task_list.length;i++){}
-        //循环里所有代码封装成函数，可以防止闭包带来的问题
+        $('.task-list').empty();
         $(task_list).each(function (i) {
             render_task(i);
             listen(i);
-        });
+        });//循环里所有代码封装成函数，可以防止闭包带来的问题
     }
     function render_task(i) {
         if(task_list[i].complete){
             $('.task-list').append($(
                 _tpl.replace('{{item-content}}',task_list[i].content)
                     .replace(/\{\{index\}\}/g,i)
+                    .replace(/\{\{time-remaining\}\}/,'已完成')
             ));
         }else{
             $('.task-list').prepend($(
@@ -54,6 +63,7 @@
                     .replace(/\{\{index\}\}/g,i)
                     .replace(/checked/,'')
                     .replace(/completed/,'')
+                    .replace(/\{\{time-remaining\}\}/,return_time_remaining(i))
             ));
         }
     }
@@ -98,6 +108,46 @@
         console.log('任务状态更新为',task_list[i]);
         refresh_list();
     }
+    function return_time_remaining(i) {
+        // console.log(task_list[i].date);
+        if(task_list[i].date){
+            var current_timestamp=(new Date()).getTime();
+            var task_timestamp=(new Date(task_list[i].date)).getTime();
+            intDiff = parseInt((task_timestamp-current_timestamp)/1000);
+            return timer(intDiff);
+        }
+        else{
+            return " ";
+        }
+    }
+
+    //返回剩余时间
+    function timer(intDiff) {
+        // 参数intDiff为总秒数
+            var day = 0,
+                hour = 0,
+                minute = 0,
+                second = 0; //时间默认值
+            if (intDiff > 0) {
+                day = Math.floor(intDiff / (60 * 60 * 24));
+                hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
+                minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
+                // second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+            }else{return '已过期'}
+            // if (minute <= 9) minute = '0' + minute;
+            // if (second <= 9) second = '0' + second;
+            if(day>0){
+                return hour==0?day + "天后":day + "天"+hour + '小时后';
+            }else if(hour>0){
+                return minute==0?hour + '小时后':hour + '小时' + minute + '分钟后';
+            }else {
+                return minute<30?"少于半小时":minute + '分钟后';
+                // return minute + '分钟'+ second + '秒后';
+            }
+           //  else{
+           //     return  second + '秒后';
+           // }
+    }
     //隐藏的清除全部任务
     $('h1').on('dblclick',function (e) {
         e.preventDefault();
@@ -124,8 +174,6 @@
         }
         $('input[name=content]').val('');
     });
-
-
 
 
 
