@@ -10,10 +10,10 @@
 
 
     // setInterval(render_task_list(), 1000);//每秒渲染一次界面
-    //初始化，读取localStorage，并渲染，相当于刷新界面
+    //初始化，读取localStorage，并渲染
     init();
     function init() {
-        task_list=store.get('task_list')||[];
+        task_list=store.get('task_list')||[{content: "例1：周末去理发", desc: "剃个3毫米，凉快！", date: "2017/03/04 20:44", complete: true},{content: "例2：明天晚上去看电影", desc: "别忘了买票！", date: "2017/03/07 20:00", complete: false},{content: "例3：4月份《第一季度 工作报告》", desc: "提前准备！", date: "2017/04/01 00:00"}];//
         render_task_list();
     }
     console.log('当前任务列表task_list',task_list);
@@ -151,10 +151,10 @@
     //隐藏的清除全部任务
     $('h1').on('dblclick',function (e) {
         e.preventDefault();
-        console.log('点击了清空操作');
-        var _q=confirm('确定清空全部任务吗？');
-        if(_q) {store.clear();init();console.log('清空了任务列表');console.log('当前任务列表task_list',task_list);}
-        else{    console.log('取消了清空操作')};
+        console.log('点击了初始化');
+        var _q=confirm('确定初始化吗？\n初始化：清除数据并填充测试数据。此操作只会清除LocalStorage的数据，并不会将测试数据储存到LocalStorage。如果您更改了测试数据（增、删、改，包括勾选），所有数据都会储存到LocalStorage！');
+        if(_q) {store.clear();init();console.log('初始化完成');console.log('当前任务列表task_list',task_list);}
+        else{    console.log('取消了初始化操作')}
     });
     //蒙版
     $('.task-detail-mask').on('click',function () {
