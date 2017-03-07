@@ -50,7 +50,8 @@ h1{
 }
 .time-remaining{
     float: right;
-    margin-right: 10px;
+    margin-right: 20px;
+    opacity:.6;
 }
 /*.completed .time-remaining{
     display: none;

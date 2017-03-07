@@ -22,7 +22,7 @@
                 <span class="task-content">{{item-content}}</span>
                 <span class="del" id="del_{{index}}">删除</span>
                 <span class="det" id="det_{{index}}">详细</span>
-                <span class="time-remaining">{{time-remaining}}</span>
+                <span class="time-remaining"><i>{{time-remaining}}</i></span>
             </li>
         </ul>
 
@@ -31,9 +31,9 @@
         <div class="task-detail">
             <form class="remind ">
                 <input name="content"  type="text" class="content">
-                <input name='date' class="date" type="text" placeholder="日期">
+                <input name='date' class="date" type="text" placeholder="设置日期...">
                 <button name='submit' type="submit">保存</button>
-                <textarea name="desc" >{{item-desc}}</textarea>
+                <textarea name="desc" placeholder="添加描述...">{{item-desc}}</textarea>
             </form>
         </div>
 

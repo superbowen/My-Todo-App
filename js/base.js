@@ -9,7 +9,7 @@
 
 
 
-    setInterval(render_task_list(), 1000);//每秒渲染一次界面
+    // setInterval(render_task_list(), 1000);//每秒渲染一次界面
     //初始化，读取localStorage，并渲染，相当于刷新界面
     init();
     function init() {
@@ -24,6 +24,7 @@
         console.log('当前任务列表task_list',task_list);
         render_task_list();
     }
+
     //增加任务
     function add_task(nt) {
         init();
@@ -31,6 +32,7 @@
         refresh_list();
         return true;
     }
+
     //删除任务
     function delete_task(_index) {
         // if(_index===undefined||!task_list[_index]) return;
@@ -39,6 +41,7 @@
         console.log('删除了任务',_d[0]);
         refresh_list();
     }
+
     //渲染界面
     function render_task_list() {
         $('.task-list').empty();
@@ -117,6 +120,7 @@
             return " ";
         }
     }
+
     //返回剩余时间
     function timer(intDiff) {
         // 参数intDiff为总秒数
@@ -128,20 +132,21 @@
                 day = Math.floor(intDiff / (60 * 60 * 24));
                 hour = Math.floor(intDiff / (60 * 60)) - (day * 24);
                 minute = Math.floor(intDiff / 60) - (day * 24 * 60) - (hour * 60);
-                second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
+                // second = Math.floor(intDiff) - (day * 24 * 60 * 60) - (hour * 60 * 60) - (minute * 60);
             }else{return '已过期'}
             // if (minute <= 9) minute = '0' + minute;
             // if (second <= 9) second = '0' + second;
             if(day>0){
-                return day + "天"+hour + '小时后';
+                return hour==0?day + "天后":day + "天"+hour + '小时后';
             }else if(hour>0){
-                return hour + '小时' + minute + '分钟后';
-            }else if(minute>0){
-                // return minute + '分钟后';
-                return minute + '分钟'+ second + '秒后';
-            }else{
-                return  second + '秒后';
+                return minute==0?hour + '小时后':hour + '小时' + minute + '分钟后';
+            }else {
+                return minute<30?"少于半小时":minute + '分钟后';
+                // return minute + '分钟'+ second + '秒后';
             }
+           //  else{
+           //     return  second + '秒后';
+           // }
     }
     //隐藏的清除全部任务
     $('h1').on('dblclick',function (e) {
