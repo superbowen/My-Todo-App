@@ -35,7 +35,7 @@ h1{
     float: left;
 }
 .completed{
-    opacity:.5;
+    opacity:.6;
 }
 .completed .task-content{
     text-decoration: line-through;
@@ -53,9 +53,6 @@ h1{
     margin-right: 20px;
     opacity:.6;
 }
-/*.completed .time-remaining{
-    display: none;
-}*/
 
 input[type=checkbox]{
         width: 1.2em;

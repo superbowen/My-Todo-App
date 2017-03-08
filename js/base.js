@@ -10,10 +10,15 @@
 
 
     // setInterval(render_task_list(), 1000);//每秒渲染一次界面
-    //初始化，读取localStorage，并渲染
+    //初始化，读取localStorage，并渲染（如果没有可读数据，则填充测试数据）
     init();
     function init() {
-        task_list=store.get('task_list')||[{content: "例1：周末去理发", desc: "剃个3毫米，凉快！", date: "2017/03/04 20:44", complete: true},{content: "例2：明天晚上去看电影", desc: "别忘了买票！", date: "2017/03/07 20:00", complete: false},{content: "例3：4月份《第一季度 工作报告》", desc: "提前准备！", date: "2017/04/01 00:00"}];//
+        task_list=store.get('task_list')||[
+            {content: "勾选可标记事项的“完成情况”", desc: "这是一项已完成的任务", date: "2017/03/07 20:00", complete:true},
+                {content: "关于", desc: "作者：博文↵企鹅：570954060↵GitHub主页：https://github.com/superbowen", date: "", complete:true},
+                {content: "点击“详细”按钮可进一步添加“描述”、“日期”等信息", desc: "这是一条描述。", date: "2017/05/05 18:00"},
+                {content: "特性：不会因为刷新界面/关闭窗口而丢失数据", desc: "此应用的数据是储存到LocalStorage的，除非手动清空。双击顶部“我的Todo”字样，开启初始化功能。",date:"2017/01/01 20:17"}
+                ];
         render_task_list();
     }
     console.log('当前任务列表task_list',task_list);
@@ -70,7 +75,7 @@
     function listen(i) {
         $('#del_' + i).on('click',function () {
             console.log("点击了删除按钮",task_list[i]);
-            var _r=confirm("确定删除？");
+            var _r=confirm("确定删除？\n提示：此操作不可撤销！");
             _r?delete_task(i):console.log("取消了删除操作");
         });
         $('#det_'+i).on('click',function () {
@@ -90,7 +95,7 @@
         $cont.val(task_list[i].content);
         $desc.val(task_list[i].desc);
         $date.val(task_list[i].date);
-            //保存按钮
+            //“保存”按钮
             $('.remind').on('submit',function (e) {
                 e.preventDefault();
                 task_list[i].desc=$desc.val();
@@ -103,13 +108,11 @@
     }
     function task_complete(i) {
         var _c=$('#complete_'+i).is(':checked');
-        // console.log(_c);
         task_list[i].complete=_c;
         console.log('任务状态更新为',task_list[i]);
         refresh_list();
     }
     function return_time_remaining(i) {
-        // console.log(task_list[i].date);
         if(task_list[i].date){
             var current_timestamp=(new Date()).getTime();
             var task_timestamp=(new Date(task_list[i].date)).getTime();
@@ -121,9 +124,8 @@
         }
     }
 
-    //返回剩余时间
+    //返回剩余时间，传入剩余总秒数
     function timer(intDiff) {
-        // 参数intDiff为总秒数
             var day = 0,
                 hour = 0,
                 minute = 0,
@@ -148,6 +150,7 @@
            //     return  second + '秒后';
            // }
     }
+
     //隐藏的清除全部任务
     $('h1').on('dblclick',function (e) {
         e.preventDefault();
@@ -156,12 +159,14 @@
         if(_q) {store.clear();init();console.log('初始化完成');console.log('当前任务列表task_list',task_list);}
         else{    console.log('取消了初始化操作')}
     });
+
     //蒙版
     $('.task-detail-mask').on('click',function () {
         $(this).hide();$('.task-detail').hide();
         $('.remind').unbind('submit');
     });
-    //增加按钮
+
+    //“添加”按钮
     $('.add-task').on('submit',function (e) {
         e.preventDefault();//阻止默认行为
         var new_task={};
