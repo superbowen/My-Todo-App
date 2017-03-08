@@ -4,6 +4,7 @@
 }
 body{
     background: #00334b;
+    text-overflow:ellipsis;
     /*min-height:900px;*/
 }
 .container{
@@ -112,7 +113,7 @@ button:hover{
 
 .task-detail-mask{
     display: none;
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
@@ -124,7 +125,7 @@ button:hover{
 
 .task-detail{
     display: none;
-    position: absolute;
+    position: fixed;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
