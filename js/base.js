@@ -16,7 +16,7 @@
         task_list=store.get('task_list')||[
             {content: "勾选可标记事项的“完成情况”", desc: "这是一项已完成的任务", date: "2017/03/07 20:00", complete:true},
                 {content: "关于", desc: "作者：博文↵企鹅：570954060↵GitHub主页：https://github.com/superbowen", date: "", complete:true},
-                {content: "点击“详细”按钮可进一步添加“描述”、“日期”等信息", desc: "这是一条描述。", date: "2017/05/05 18:00"},
+                {content: "点击任务可查看或添加“描述”、“日期”等信息", desc: "这是一条描述。", date: "2017/05/05 18:00"},
                 {content: "特性：不会因为刷新界面/关闭窗口而丢失数据", desc: "此应用的数据是储存到LocalStorage的，除非手动清空。双击顶部“我的Todo”字样，开启初始化功能。",date:"2017/01/01 20:17"}
                 ];
         render_task_list();
@@ -73,18 +73,21 @@
         }
     }
     function listen(i) {
-        $('#del_' + i).on('click',function () {
+        //监听并更新完成状态
+        $('#complete_'+i).on('click',function () {task_complete(i);});
+        //监听“删除”按钮
+        $('#del_' + i).on('click',function (e) {
+            e.stopPropagation();//阻止事件冒泡
             console.log("点击了删除按钮",task_list[i]);
             var _r=confirm("确定删除？\n提示：此操作不可撤销！");
             _r?delete_task(i):console.log("取消了删除操作");
         });
-        $('#det_'+i).on('click',function () {
+        //监听“详情”，事件委托
+        // $('#det_'+i).on('click',function () { show_detail(i);console.log('查看了任务',task_list[i]) });
+        $('#item_'+i).on('click',function () {
             show_detail(i);
             console.log('查看了任务',task_list[i])
-        });
-        $('#complete_'+i).on('click',function () {
-            task_complete(i);
-        });
+        })
     }
     function show_detail(i){
         //渲染任务详情界面
