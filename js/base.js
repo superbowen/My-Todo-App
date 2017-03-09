@@ -17,7 +17,7 @@
             {content: "勾选可标记事项的“完成情况”", desc: "这是一项已完成的任务", date: "2017/03/07 20:00", complete:true},
                 {content: "关于", desc: "作者：博文↵企鹅：570954060↵GitHub主页：https://github.com/superbowen", date: "", complete:true},
                 {content: "点击任务可查看或添加“描述”、“日期”等信息", desc: "这是一条描述。", date: "2017/05/05 18:00"},
-                {content: "特性：不会因为刷新界面/关闭窗口而丢失数据", desc: "此应用的数据是储存到LocalStorage的，除非手动清空。双击顶部“我的Todo”字样，开启初始化功能。",date:"2017/01/01 20:17"}
+                {content: "本地储存：不会因为刷新界面/关闭浏览器而丢失数据，不会发送数据到服务器", desc: "此应用的数据是储存到LocalStorage的，如需清空，双击顶部“我的Todo”字样，开启初始化功能。",date:"2017/01/01 20:17"}
                 ];
         render_task_list();
     }
