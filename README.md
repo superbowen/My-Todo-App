@@ -1,5 +1,5 @@
-# My-Todo-App
-第三个案例：https://superbowen.github.io/My-Todo-App/
+# 第三个案例：My-Todo-App（jQuery）
+
 ##新收获：
 * 模块化思想：封装很多小函数小组件互相调用，取代一整个大函数运行的思想；
 * 使用jQuery.store.js插件实现localStorage的存取数据；
