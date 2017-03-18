@@ -1,10 +1,9 @@
 # 第三个案例：My-Todo-App（jQuery）
 
 ##新收获：
-* 模块化思想：封装很多小函数小组件互相调用，取代一整个大函数运行的思想；
 * 使用jQuery.store.js插件实现localStorage的存取数据；
+* 数据和视图的双向绑定
 * jQuery.datetimepicker.js的使用；
-* 使用%和em控制大小宽高，使用min和max控制最值，灵活适应分辨率。
 * 了解事件代理和阻止冒泡的操作。
 * jQ熟练度得到提升。
 
